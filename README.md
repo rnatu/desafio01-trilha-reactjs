@@ -10,4 +10,4 @@ Este Desafio visa o aprendizado com as bases do ReactJS e TypeScript.
 * ReactJS
   * SASS
   * Webpack
-* TypeScript;
+* TypeScript
