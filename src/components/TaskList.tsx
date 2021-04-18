@@ -17,9 +17,14 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
     function getRandomInt() {
-      return Math.floor(Math.random() * (100 - 0 + 1)) + 0;
+      return Math.floor(Math.random() * 100) + 1;
     }
-    const randomId = getRandomInt();
+
+    let randomId = getRandomInt();
+
+    while (tasks.find((task) => task.id === randomId)) {
+      randomId = getRandomInt();
+    }
 
     if (!newTaskTitle) return;
 
@@ -31,7 +36,7 @@ export function TaskList() {
 
     setTasks((oldstate) => [...oldstate, newTask]);
 
-    setNewTaskTitle('');
+    setNewTaskTitle("");
   }
 
   function handleToggleTaskCompletion(id: number) {
