@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "../styles/tasklist.scss";
 
@@ -11,7 +11,15 @@ interface Task {
 }
 
 export function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const storageTasks = localStorage.getItem('tasks');
+
+    if(storageTasks) {
+      return JSON.parse(storageTasks)
+    }
+    return [];
+  });
+
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
   function handleCreateNewTask() {
@@ -36,6 +44,8 @@ export function TaskList() {
 
     setTasks((oldstate) => [...oldstate, newTask]);
 
+    localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
+
     setNewTaskTitle("");
   }
 
@@ -51,12 +61,16 @@ export function TaskList() {
     );
 
     setTasks(newTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
   }
 
   function handleRemoveTask(id: number) {
     const filteredTasks = tasks.filter((task) => task.id !== id);
 
     setTasks(filteredTasks);
+
+    localStorage.setItem("tasks", JSON.stringify(filteredTasks));
   }
 
   return (
