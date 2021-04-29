@@ -1,5 +1,5 @@
 <h1 align="center">
-<img alig src="./public/logo.svg" width=500 alt="Desafio RocketShoes">
+<img alig src="./public/logoReadme.svg" width=500 alt="Desafio RocketShoes">
   <br>
   <br>
     Chapter 1 - Desafio Principal
